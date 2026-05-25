@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyPortfolio - Personal Homepage (Demo)</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary: #0d6efd; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8f9fb; }
+    
+    /* Carousel */
+    .carousel-bg { height: 300px; }
+    .carousel-bg-1 { background: linear-gradient(135deg, #0d6efd, #6f42c1); }
+    .carousel-bg-2 { background: linear-gradient(135deg, #198754, #0dcaf0); }
+    .carousel-bg-3 { background: linear-gradient(135deg, #fd7e14, #dc3545); }
+    .carousel-caption-custom { text-shadow: 0 2px 10px rgba(0,0,0,.4); }
+
+    /* Sidebar sticky */
+    .sidebar-wrapper { position: sticky; top: 76px; }
+    @media(max-width:768px){ .sidebar-wrapper { position:static; } }
+    
+    /* Cards */
+    .card { border-radius: 12px; }
+    .card-header { border-radius: 12px 12px 0 0 !important; }
+    
+    /* Page animation */
+    .page-section { animation: fadeSlide .35s ease; }
+    @keyframes fadeSlide { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+    /* Progress */
+    .progress { border-radius: 10px; }
+    .progress-bar { border-radius: 10px; transition: width 1s ease; }
+
+    /* Active nav */
+    .nav-link.active { font-weight: 700 !important; }
+    
+    /* Table */
+    .table th { font-size:.82rem; text-transform:uppercase; letter-spacing:.04em; }
+
+    /* Login card */
+    #loginSection { display: none; }
+
+    /* Dropdown caret style */
+    .navbar-nav .dropdown-menu { border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+  </style>
+</head>
+<body>
+
+<!-- ===== MENU (navbar bootstrap) ===== -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow" id="mainNavbar">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#" onclick="showPage('home')">
+      <i class="bi bi-person-circle me-2"></i>MyPortfolio
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0" id="navLinks">
+        <li class="nav-item">
+          <a class="nav-link active" href="#" onclick="showPage('home');setActive(this)"><i class="bi bi-house me-1"></i>Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="showPage('about');setActive(this)"><i class="bi bi-person me-1"></i>About Me</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="showPage('contact');setActive(this)"><i class="bi bi-envelope me-1"></i>Contact Me</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="bi bi-book me-1"></i>My Studies</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#" onclick="showPage('level');setActive(this)"><i class="bi bi-diagram-3 me-1"></i>Level</a></li>
+            <li><a class="dropdown-item" href="#" onclick="showPage('studies');setActive(this)"><i class="bi bi-journal-bookmark me-1"></i>Studies</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="ms-3" id="navAuthArea">
+        <a class="btn btn-outline-light btn-sm" href="#" onclick="showPage('login')">
+          <i class="bi bi-box-arrow-in-right me-1"></i>Login
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HEADER CAROUSEL (bootstrap) ===== -->
+<div id="headerCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#headerCarousel" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#headerCarousel" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#headerCarousel" data-bs-slide-to="2"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="carousel-bg carousel-bg-1 d-flex align-items-center justify-content-center">
+        <div class="carousel-caption-custom text-center">
+          <h1 class="display-4 fw-bold text-white">Selamat Datang!</h1>
+          <p class="lead text-white-50">Personal Homepage dengan Bootstrap 5</p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="carousel-bg carousel-bg-2 d-flex align-items-center justify-content-center">
+        <div class="carousel-caption-custom text-center">
+          <h1 class="display-4 fw-bold text-white">Portofolio Saya</h1>
+          <p class="lead text-white-50">Web Developer & Mahasiswa Informatika</p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="carousel-bg carousel-bg-3 d-flex align-items-center justify-content-center">
+        <div class="carousel-caption-custom text-center">
+          <h1 class="display-4 fw-bold text-white">My Studies</h1>
+          <p class="lead text-white-50">Perjalanan Akademik & Pendidikan Saya</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#headerCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#headerCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+<!-- ===== MAIN LAYOUT (3 + 9 grid) ===== -->
+<div class="container py-4">
+  <div class="row g-4">
+    
+    <!-- SIDEBAR (3 grid) -->
+    <div class="col-lg-3">
+      <div class="sidebar-wrapper">
+        <!-- Profile Card -->
+        <div class="card shadow-sm mb-3 border-0">
+          <div class="card-body text-center py-4">
+            <img src="https://ui-avatars.com/api/?name=Nama+Saya&background=0d6efd&color=fff&size=90" 
+                 class="rounded-circle border border-3 border-primary mb-2" alt="Profile">
+            <h5 class="fw-bold mb-1" id="sidebarUsername">Nama Saya</h5>
+            <p class="text-muted small mb-0">Web Developer</p>
+            <div class="mt-2" id="sidebarRole"><span class="badge bg-primary">Mahasiswa</span></div>
+          </div>
+        </div>
+
+        <!-- List Group Navigation -->
+        <div class="card shadow-sm mb-3 border-0">
+          <div class="card-header bg-primary text-white fw-bold">
+            <i class="bi bi-compass me-2"></i>Navigasi
+          </div>
+          <div class="list-group list-group-flush" id="sidebarNav">
+            <a href="#" class="list-group-item list-group-item-action active" onclick="showPage('home');setSidebarActive(this)">
+              <i class="bi bi-house me-2"></i>Home
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="showPage('about');setSidebarActive(this)">
+              <i class="bi bi-person me-2"></i>About Me
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="showPage('contact');setSidebarActive(this)">
+              <i class="bi bi-envelope me-2"></i>Contact Me
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="showPage('level');setSidebarActive(this)">
+              <i class="bi bi-diagram-3 me-2"></i>Level
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="showPage('studies');setSidebarActive(this)">
+              <i class="bi bi-journal-bookmark me-2"></i>Studies
+            </a>
+          </div>
+        </div>
+
+        <!-- Info Card -->
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-success text-white fw-bold">
+            <i class="bi bi-info-circle me-2"></i>Info
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><i class="bi bi-geo-alt me-2 text-primary"></i>Indonesia</li>
+            <li class="list-group-item"><i class="bi bi-mortarboard me-2 text-success"></i>S1 Informatika</li>
+            <li class="list-group-item"><i class="bi bi-calendar me-2 text-warning"></i>2021–Sekarang</li>
+            <li class="list-group-item">
+              <div class="d-flex gap-2">
+                <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-github"></i></a>
+                <a href="#" class="btn btn-sm btn-outline-info"><i class="bi bi-linkedin"></i></a>
+                <a href="#" class="btn btn-sm btn-outline-danger"><i class="bi bi-instagram"></i></a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT (9 grid) -->
+    <div class="col-lg-9">
+
+      <!-- ===== HOME PAGE ===== -->
+      <div id="page-home" class="page-section">
+        <div class="mb-4">
+          <h2 class="fw-bold"><i class="bi bi-house-heart me-2 text-primary"></i>Beranda</h2>
+          <p class="text-muted">Selamat datang di halaman personal saya!</p>
+        </div>
+
+        <!-- Card Horizontal - Profile -->
+        <div class="card shadow-sm mb-4 border-0 overflow-hidden">
+          <div class="row g-0">
+            <div class="col-md-3 bg-primary d-flex align-items-center justify-content-center p-4">
+              <div class="text-center text-white">
+                <img src="https://ui-avatars.com/api/?name=Nama+Saya&background=fff&color=0d6efd&size=120" 
+                     class="rounded-circle mb-2 border border-3 border-white" alt="Profile" width="100">
+                <h5 class="mb-0 fw-bold">Nama Saya</h5>
+                <small>Web Developer</small>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="card-body p-4">
+                <h4 class="fw-bold">Halo, Saya Nama Saya! 👋</h4>
+                <p class="text-muted">Mahasiswa Informatika yang passionate di bidang pengembangan web dan teknologi. Senang bertemu di halaman personal saya!</p>
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                  <span class="badge bg-primary"><i class="bi bi-code-slash me-1"></i>PHP</span>
+                  <span class="badge bg-warning text-dark"><i class="bi bi-filetype-js me-1"></i>JavaScript</span>
+                  <span class="badge bg-success"><i class="bi bi-bootstrap me-1"></i>Bootstrap</span>
+                  <span class="badge bg-danger"><i class="bi bi-database me-1"></i>MySQL</span>
+                </div>
+                <hr>
+                <div class="row text-center">
+                  <div class="col-4"><div class="fw-bold text-primary fs-4">5+</div><small class="text-muted">Proyek</small></div>
+                  <div class="col-4"><div class="fw-bold text-success fs-4">3+</div><small class="text-muted">Tahun Belajar</small></div>
+                  <div class="col-4"><div class="fw-bold text-warning fs-4">10+</div><small class="text-muted">Teknologi</small></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hobi - Card Horizontal -->
+        <h5 class="fw-bold mb-3"><i class="bi bi-controller me-2 text-success"></i>Hobi Saya</h5>
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="row g-0 align-items-center">
+                <div class="col-auto p-3"><div class="rounded-circle bg-primary bg-opacity-10 p-3"><i class="bi bi-code-square fs-3 text-primary"></i></div></div>
+                <div class="col"><div class="card-body py-2"><h6 class="fw-bold mb-0">Coding</h6><small class="text-muted">Membuat website dan aplikasi</small></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="row g-0 align-items-center">
+                <div class="col-auto p-3"><div class="rounded-circle bg-success bg-opacity-10 p-3"><i class="bi bi-book fs-3 text-success"></i></div></div>
+                <div class="col"><div class="card-body py-2"><h6 class="fw-bold mb-0">Membaca</h6><small class="text-muted">Buku teknologi & fiksi</small></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="row g-0 align-items-center">
+                <div class="col-auto p-3"><div class="rounded-circle bg-warning bg-opacity-10 p-3"><i class="bi bi-music-note-beamed fs-3 text-warning"></i></div></div>
+                <div class="col"><div class="card-body py-2"><h6 class="fw-bold mb-0">Musik</h6><small class="text-muted">Mendengarkan berbagai genre</small></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="row g-0 align-items-center">
+                <div class="col-auto p-3"><div class="rounded-circle bg-danger bg-opacity-10 p-3"><i class="bi bi-bicycle fs-3 text-danger"></i></div></div>
+                <div class="col"><div class="card-body py-2"><h6 class="fw-bold mb-0">Olahraga</h6><small class="text-muted">Bersepeda dan jogging</small></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Favorite Menu -->
+        <h5 class="fw-bold mb-3"><i class="bi bi-star me-2 text-warning"></i>Favorite Menu</h5>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="card border-0 shadow-sm text-center p-3"><i class="bi bi-laptop fs-1 text-primary mb-2"></i><h6 class="fw-bold">VSCode</h6><small class="text-muted">Editor favorit saya</small></div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-0 shadow-sm text-center p-3"><i class="bi bi-github fs-1 text-dark mb-2"></i><h6 class="fw-bold">GitHub</h6><small class="text-muted">Version control</small></div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-0 shadow-sm text-center p-3"><i class="bi bi-bootstrap fs-1 text-primary mb-2"></i><h6 class="fw-bold">Bootstrap</h6><small class="text-muted">CSS Framework</small></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== ABOUT PAGE ===== -->
+      <div id="page-about" class="page-section" style="display:none">
+        <div class="mb-4">
+          <h2 class="fw-bold"><i class="bi bi-person-lines-fill me-2 text-primary"></i>About Me</h2>
+          <p class="text-muted">Kenali lebih jauh tentang saya.</p>
+        </div>
+        <div class="row g-4 mb-4">
+          <div class="col-md-4 text-center">
+            <img src="https://ui-avatars.com/api/?name=Nama+Saya&background=0d6efd&color=fff&size=200" 
+                 class="rounded-circle img-fluid shadow mb-3" alt="Profile" style="max-width:180px">
+            <h4 class="fw-bold">Nama Saya</h4>
+            <p class="text-muted">Mahasiswa Informatika</p>
+            <div class="d-flex justify-content-center gap-2">
+              <a href="#" class="btn btn-outline-dark btn-sm"><i class="bi bi-github"></i></a>
+              <a href="#" class="btn btn-outline-primary btn-sm"><i class="bi bi-linkedin"></i></a>
+              <a href="#" class="btn btn-outline-danger btn-sm"><i class="bi bi-instagram"></i></a>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <h5 class="fw-bold">Halo! 👋</h5>
+            <p class="text-muted">Saya adalah mahasiswa Informatika semester 5 yang memiliki ketertarikan kuat dalam pengembangan web dan teknologi informasi.</p>
+            <ul class="list-unstyled">
+              <li class="mb-1"><strong><i class="bi bi-person me-2 text-primary"></i>Nama:</strong> Nama Saya</li>
+              <li class="mb-1"><strong><i class="bi bi-calendar me-2 text-primary"></i>Lahir:</strong> 1 Januari 2002</li>
+              <li class="mb-1"><strong><i class="bi bi-geo-alt me-2 text-primary"></i>Asal:</strong> Indonesia</li>
+              <li class="mb-1"><strong><i class="bi bi-envelope me-2 text-primary"></i>Email:</strong> email@example.com</li>
+            </ul>
+            <div class="mt-3">
+              <div class="d-flex justify-content-between mb-1"><span>PHP</span><span>80%</span></div>
+              <div class="progress mb-2" style="height:8px"><div class="progress-bar bg-primary" style="width:80%"></div></div>
+              <div class="d-flex justify-content-between mb-1"><span>JavaScript</span><span>70%</span></div>
+              <div class="progress mb-2" style="height:8px"><div class="progress-bar bg-warning" style="width:70%"></div></div>
+              <div class="d-flex justify-content-between mb-1"><span>Bootstrap</span><span>85%</span></div>
+              <div class="progress" style="height:8px"><div class="progress-bar bg-success" style="width:85%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACCORDION Pengalaman Organisasi -->
+        <h5 class="fw-bold mb-3"><i class="bi bi-diagram-2 me-2 text-primary"></i>Pengalaman Organisasi</h5>
+        <div class="accordion" id="orgAccordion">
+          <div class="accordion-item border-0 shadow-sm mb-2">
+            <h2 class="accordion-header">
+              <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#org1">
+                <i class="bi bi-building me-2 text-primary"></i>Himpunan Mahasiswa Informatika
+                <span class="ms-auto me-3 badge bg-secondary fw-normal">2022–Sekarang</span>
+              </button>
+            </h2>
+            <div id="org1" class="accordion-collapse collapse show" data-bs-parent="#orgAccordion">
+              <div class="accordion-body pt-0">
+                <span class="badge bg-primary mb-2">Anggota Divisi Teknologi</span>
+                <p class="text-muted mb-0">Aktif dalam kegiatan himpunan, membantu pengembangan website, dan mengorganisir acara teknologi tahunan.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item border-0 shadow-sm mb-2">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#org2">
+                <i class="bi bi-building me-2 text-primary"></i>UKM Pemrograman
+                <span class="ms-auto me-3 badge bg-secondary fw-normal">2021–2023</span>
+              </button>
+            </h2>
+            <div id="org2" class="accordion-collapse collapse" data-bs-parent="#orgAccordion">
+              <div class="accordion-body pt-0">
+                <span class="badge bg-primary mb-2">Ketua Divisi Web</span>
+                <p class="text-muted mb-0">Memimpin tim pengembang web dalam UKM, melatih anggota baru dalam pemrograman PHP dan Bootstrap.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item border-0 shadow-sm mb-2">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#org3">
+                <i class="bi bi-building me-2 text-primary"></i>Komunitas Open Source
+                <span class="ms-auto me-3 badge bg-secondary fw-normal">2023–Sekarang</span>
+              </button>
+            </h2>
+            <div id="org3" class="accordion-collapse collapse" data-bs-parent="#orgAccordion">
+              <div class="accordion-body pt-0">
+                <span class="badge bg-primary mb-2">Kontributor</span>
+                <p class="text-muted mb-0">Berkontribusi pada beberapa proyek open source, memperbaiki bug dan menambah fitur baru.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item border-0 shadow-sm">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#org4">
+                <i class="bi bi-building me-2 text-primary"></i>BEM Fakultas Ilmu Komputer
+                <span class="ms-auto me-3 badge bg-secondary fw-normal">2022–2023</span>
+              </button>
+            </h2>
+            <div id="org4" class="accordion-collapse collapse" data-bs-parent="#orgAccordion">
+              <div class="accordion-body pt-0">
+                <span class="badge bg-primary mb-2">Staff IT</span>
+                <p class="text-muted mb-0">Bertanggung jawab atas pengelolaan website BEM dan infrastruktur digital fakultas.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== CONTACT PAGE ===== -->
+      <div id="page-contact" class="page-section" style="display:none">
+        <div class="mb-4">
+          <h2 class="fw-bold"><i class="bi bi-envelope-heart me-2 text-primary"></i>Contact Me</h2>
+          <p class="text-muted">Hubungi saya melalui berbagai platform berikut.</p>
+        </div>
+
+        <!-- Card Group 1 -->
+        <h5 class="fw-bold mb-3">Kontak Utama</h5>
+        <div class="card-group mb-4 shadow-sm rounded overflow-hidden">
+          <div class="card border-0">
+            <div class="card-body text-center py-4">
+              <div class="rounded-circle bg-danger bg-opacity-10 mx-auto d-flex align-items-center justify-content-center mb-3" style="width:64px;height:64px">
+                <i class="bi bi-envelope-fill fs-3 text-danger"></i>
+              </div>
+              <h5 class="card-title fw-bold">Email</h5>
+              <p class="card-text text-muted small">email@example.com</p>
+              <a href="mailto:email@example.com" class="btn btn-danger btn-sm">Kirim Email</a>
+            </div>
+          </div>
+          <div class="card border-0">
+            <div class="card-body text-center py-4">
+              <div class="rounded-circle bg-success bg-opacity-10 mx-auto d-flex align-items-center justify-content-center mb-3" style="width:64px;height:64px">
+                <i class="bi bi-whatsapp fs-3 text-success"></i>
+              </div>
+              <h5 class="card-title fw-bold">WhatsApp</h5>
+              <p class="card-text text-muted small">+62 812-3456-7890</p>
+              <a href="#" class="btn btn-success btn-sm">Chat WA</a>
+            </div>
+          </div>
+          <div class="card border-0">
+            <div class="card-body text-center py-4">
+              <div class="rounded-circle bg-primary bg-opacity-10 mx-auto d-flex align-items-center justify-content-center mb-3" style="width:64px;height:64px">
+                <i class="bi bi-linkedin fs-3 text-primary"></i>
+              </div>
+              <h5 class="card-title fw-bold">LinkedIn</h5>
+              <p class="card-text text-muted small">linkedin.com/in/namasaya</p>
+              <a href="#" class="btn btn-primary btn-sm">Connect</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Group 2 -->
+        <div class="card-group mb-4 shadow-sm rounded overflow-hidden">
+          <div class="card border-0">
+            <div class="card-body text-center py-4">
+              <div class="rounded-circle bg-dark bg-opacity-10 mx-auto d-flex align-items-center justify-content-center mb-3" style="width:64px;height:64px">
+                <i class="bi bi-github fs-3 text-dark"></i>
+              </div>
+              <h5 class="card-title fw-bold">GitHub</h5>
+              <p class="card-text text-muted small">github.com/namasaya</p>
+              <a href="#" class="btn btn-dark btn-sm">Follow</a>
+            </div>
+          </div>
+          <div class="card border-0">
+            <div class="card-body text-center py-4">
+              <div class="rounded-circle bg-danger bg-opacity-10 mx-auto d-flex align-items-center justify-content-center mb-3" style="width:64px;height:64px">
+                <i class="bi bi-instagram fs-3 text-danger"></i>
+              </div>
+              <h5 class="card-title fw-bold">Instagram</h5>
+              <p class="card-text text-muted small">@namasaya</p>
+              <a href="#" class="btn btn-outline-danger btn-sm">Follow</a>
+            </div>
+          </div>
+          <div class="card border-0">
+            <div class="card-body text-center py-4">
+              <div class="rounded-circle bg-dark bg-opacity-10 mx-auto d-flex align-items-center justify-content-center mb-3" style="width:64px;height:64px">
+                <i class="bi bi-twitter-x fs-3 text-dark"></i>
+              </div>
+              <h5 class="card-title fw-bold">Twitter/X</h5>
+              <p class="card-text text-muted small">@namasaya</p>
+              <a href="#" class="btn btn-outline-dark btn-sm">Follow</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-primary text-white fw-bold"><i class="bi bi-send me-2"></i>Kirim Pesan</div>
+          <div class="card-body p-4">
+            <div id="contactAlert" class="alert alert-success d-none"><i class="bi bi-check-circle me-2"></i>Pesan terkirim!</div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Nama</label>
+                <input type="text" id="cName" class="form-control" placeholder="Nama Anda">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Email</label>
+                <input type="email" id="cEmail" class="form-control" placeholder="email@example.com">
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold">Pesan</label>
+                <textarea id="cMsg" class="form-control" rows="3" placeholder="Pesan Anda..."></textarea>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-primary" onclick="sendMsg()"><i class="bi bi-send me-2"></i>Kirim</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== LOGIN PAGE ===== -->
+      <div id="page-login" class="page-section" style="display:none">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="card shadow border-0 mt-2">
+              <div class="card-header bg-primary text-white text-center py-4">
+                <i class="bi bi-person-lock fs-1 d-block mb-2"></i>
+                <h4 class="fw-bold mb-0">Login</h4>
+                <small>Masuk ke akun Anda</small>
+              </div>
+              <div class="card-body p-4">
+                <div id="loginError" class="alert alert-danger d-none"></div>
+                <div class="alert alert-info small py-2">
+                  <strong>Demo Login:</strong><br>
+                  Admin: <code>admin</code> / <code>admin123</code><br>
+                  User: <code>user</code> / <code>user123</code>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label fw-semibold"><i class="bi bi-person me-1"></i>Username</label>
+                  <input type="text" id="loginUser" class="form-control form-control-lg" placeholder="Username">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label fw-semibold"><i class="bi bi-lock me-1"></i>Password</label>
+                  <div class="input-group">
+                    <input type="password" id="loginPass" class="form-control form-control-lg" placeholder="Password">
+                    <button class="btn btn-outline-secondary" type="button" onclick="togglePass()">
+                      <i class="bi bi-eye" id="eyeIco"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="d-grid mt-3">
+                  <button class="btn btn-primary btn-lg" onclick="doLogin()">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== LEVEL PAGE ===== -->
+      <div id="page-level" class="page-section" style="display:none">
+        <div class="mb-4">
+          <h2 class="fw-bold"><i class="bi bi-diagram-3 me-2 text-primary"></i>Kelola Level Pendidikan</h2>
+          <p class="text-muted">CRUD data level / jenjang pendidikan.</p>
+        </div>
+        <div id="levelAuthWarn" class="alert alert-warning d-none">
+          <i class="bi bi-lock me-2"></i>Silakan <a href="#" onclick="showPage('login')">login</a> untuk mengakses CRUD.
+        </div>
+        <div id="levelContent">
+          <div id="levelMsg"></div>
+          <div class="row g-4">
+            <div class="col-md-4">
+              <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white fw-bold" id="levelFormHeader">
+                  <i class="bi bi-plus-circle me-2"></i>Tambah Level
+                </div>
+                <div class="card-body">
+                  <input type="hidden" id="levelEditId" value="">
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Nama Level <span class="text-danger">*</span></label>
+                    <input type="text" id="levelNama" class="form-control" placeholder="TK, SD, SMP...">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Keterangan</label>
+                    <input type="text" id="levelKet" class="form-control" placeholder="Keterangan...">
+                  </div>
+                  <div class="d-flex gap-2">
+                    <button class="btn btn-primary flex-fill" id="levelSaveBtn" onclick="saveLevel()">
+                      <i class="bi bi-save me-1"></i>Simpan
+                    </button>
+                    <button class="btn btn-secondary d-none" id="levelCancelBtn" onclick="cancelLevelEdit()">Batal</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card shadow-sm border-0">
+                <div class="card-header bg-light fw-bold d-flex justify-content-between align-items-center">
+                  <span><i class="bi bi-table me-2 text-primary"></i>Data Level</span>
+                  <span class="badge bg-primary" id="levelCount">0</span>
+                </div>
+                <div class="card-body p-0">
+                  <div class="table-responsive">
+                    <table class="table table-hover table-striped mb-0">
+                      <thead class="table-dark">
+                        <tr><th>ID</th><th>Nama Level</th><th>Keterangan</th><th class="text-center">Aksi</th></tr>
+                      </thead>
+                      <tbody id="levelTableBody"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STUDIES PAGE ===== -->
+      <div id="page-studies" class="page-section" style="display:none">
+        <div class="mb-4">
+          <h2 class="fw-bold"><i class="bi bi-journal-bookmark me-2 text-primary"></i>Data Riwayat Pendidikan</h2>
+          <p class="text-muted">CRUD data riwayat studi / pendidikan.</p>
+        </div>
+        <div id="studiesAuthWarn" class="alert alert-warning d-none">
+          <i class="bi bi-lock me-2"></i>Silakan <a href="#" onclick="showPage('login')">login</a> untuk mengakses CRUD.
+        </div>
+        <div id="studiesContent">
+          <div id="studiesMsg"></div>
+          <!-- Form -->
+          <div class="card shadow-sm border-0 mb-4">
+            <div class="card-header fw-bold text-white" id="studiesFormHeader" style="background:#0d6efd">
+              <i class="bi bi-plus-circle me-2"></i>Tambah Data Studi
+            </div>
+            <div class="card-body">
+              <input type="hidden" id="studiesEditId" value="">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Nama Institusi <span class="text-danger">*</span></label>
+                  <input type="text" id="studiesNama" class="form-control" placeholder="Nama sekolah/universitas">
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label fw-semibold">Level</label>
+                  <select id="studiesLevel" class="form-select"></select>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label fw-semibold">Tahun</label>
+                  <input type="text" id="studiesTahun" class="form-control" placeholder="2020-2024">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">URL Foto</label>
+                  <input type="text" id="studiesFoto" class="form-control" placeholder="https://...">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Keterangan</label>
+                  <input type="text" id="studiesKet" class="form-control" placeholder="Keterangan">
+                </div>
+                <div class="col-12">
+                  <button class="btn btn-primary me-2" id="studiesSaveBtn" onclick="saveStudy()">
+                    <i class="bi bi-save me-1"></i>Simpan
+                  </button>
+                  <button class="btn btn-secondary d-none" id="studiesCancelBtn" onclick="cancelStudyEdit()">Batal</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Table -->
+          <div class="card shadow-sm border-0">
+            <div class="card-header bg-light fw-bold d-flex justify-content-between align-items-center">
+              <span><i class="bi bi-table me-2 text-primary"></i>Riwayat Pendidikan</span>
+              <span class="badge bg-primary" id="studiesCount">0</span>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover table-striped mb-0 align-middle">
+                  <thead class="table-dark">
+                    <tr><th>ID</th><th>Foto</th><th>Nama</th><th>Level</th><th>Tahun</th><th>Keterangan</th><th class="text-center">Aksi</th></tr>
+                  </thead>
+                  <tbody id="studiesTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end col main -->
+  </div><!-- end row -->
+</div><!-- end container -->
+
+<!-- FOOTER (12 grid, alerts bootstrap) -->
+<footer class="bg-dark text-white mt-5 py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <h5 class="fw-bold"><i class="bi bi-person-circle me-2"></i>MyPortfolio</h5>
+        <p class="text-white-50 small">Personal homepage dengan Bootstrap 5 sebagai tugas kuliah pemrograman web.</p>
+      </div>
+      <div class="col-md-4 mb-3">
+        <h6 class="fw-bold">Quick Links</h6>
+        <ul class="list-unstyled small">
+          <li><a href="#" onclick="showPage('home')" class="text-white-50 text-decoration-none"><i class="bi bi-chevron-right"></i> Home</a></li>
+          <li><a href="#" onclick="showPage('about')" class="text-white-50 text-decoration-none"><i class="bi bi-chevron-right"></i> About Me</a></li>
+          <li><a href="#" onclick="showPage('contact')" class="text-white-50 text-decoration-none"><i class="bi bi-chevron-right"></i> Contact</a></li>
+          <li><a href="#" onclick="showPage('studies')" class="text-white-50 text-decoration-none"><i class="bi bi-chevron-right"></i> My Studies</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 mb-3">
+        <h6 class="fw-bold">Kontak</h6>
+        <ul class="list-unstyled small text-white-50">
+          <li><i class="bi bi-envelope me-2"></i>email@example.com</li>
+          <li><i class="bi bi-telephone me-2"></i>+62 812-3456-7890</li>
+          <li><i class="bi bi-geo-alt me-2"></i>Indonesia</li>
+        </ul>
+      </div>
+    </div>
+    <hr class="border-secondary">
+    <div class="row align-items-center">
+      <div class="col-md-8">
+        <div class="alert alert-primary py-2 px-3 mb-0 d-inline-block small" role="alert">
+          <i class="bi bi-info-circle me-1"></i>Website ini dibuat untuk keperluan akademik – Tugas 1 Pemrograman Web.
+        </div>
+      </div>
+      <div class="col-md-4 text-md-end mt-2 mt-md-0">
+        <p class="text-white-50 small mb-0">&copy; 2025 MyPortfolio. Bootstrap 5.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// ========== STATE ==========
+let currentUser = null;
+let levels = [
+  {id:1,nama:'TK',keterangan:'Taman Kanak-Kanak'},
+  {id:2,nama:'SD',keterangan:'Sekolah Dasar'},
+  {id:3,nama:'SMP',keterangan:'Sekolah Menengah Pertama'},
+  {id:4,nama:'SMA',keterangan:'Sekolah Menengah Atas'},
+  {id:5,nama:'D3',keterangan:'Diploma 3'},
+  {id:6,nama:'S1',keterangan:'Strata 1 / Sarjana'},
+];
+let levelNextId = 7;
+let studies = [
+  {id:1,nama:'TK Tunas Bangsa',id_level:1,tahun:'2006-2008',foto:'',keterangan:'Taman Kanak-Kanak pertama saya'},
+  {id:2,nama:'SD Negeri 01 Harapan',id_level:2,tahun:'2008-2014',foto:'',keterangan:'Lulus dengan nilai memuaskan'},
+  {id:3,nama:'SMP Negeri 2 Maju',id_level:3,tahun:'2014-2017',foto:'',keterangan:'Aktif di ekstrakurikuler robotika'},
+  {id:4,nama:'SMA Negeri 1 Cerdas',id_level:4,tahun:'2017-2020',foto:'',keterangan:'Jurusan IPA, aktif di OSIS'},
+  {id:5,nama:'Universitas Nusantara',id_level:6,tahun:'2021-Sekarang',foto:'',keterangan:'Prodi Informatika, semester 5'},
+];
+let studiesNextId = 6;
+
+// ========== NAVIGATION ==========
+function showPage(page) {
+  document.querySelectorAll('.page-section').forEach(el => { el.style.display = 'none'; });
+  const target = document.getElementById('page-' + page);
+  if (target) { target.style.display = ''; }
+  
+  // Show/hide header on home
+  const headerEl = document.getElementById('headerCarousel');
+  if (page === 'home') headerEl.style.display = '';
+  else headerEl.style.display = 'none';
+
+  // Auth check for CRUD pages
+  if (page === 'level') renderLevel();
+  if (page === 'studies') renderStudies();
+  
+  return false;
+}
+
+function setActive(el) {
+  document.querySelectorAll('#navLinks .nav-link').forEach(e => e.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function setSidebarActive(el) {
+  document.querySelectorAll('#sidebarNav .list-group-item').forEach(e => e.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ========== AUTH ==========
+const demoUsers = [
+  {username:'admin', password:'admin123', role:'Admin'},
+  {username:'user', password:'user123', role:'User'},
+];
+
+function doLogin() {
+  const u = document.getElementById('loginUser').value.trim();
+  const p = document.getElementById('loginPass').value.trim();
+  const found = demoUsers.find(x => x.username === u && x.password === p);
+  const errEl = document.getElementById('loginError');
+  if (found) {
+    currentUser = found;
+    errEl.classList.add('d-none');
+    updateNavAuth();
+    showPage('home');
+  } else {
+    errEl.textContent = 'Username atau password salah!';
+    errEl.classList.remove('d-none');
+  }
+}
+
+function doLogout() {
+  currentUser = null;
+  updateNavAuth();
+  showPage('home');
+}
+
+function togglePass() {
+  const f = document.getElementById('loginPass');
+  const i = document.getElementById('eyeIco');
+  f.type = f.type === 'password' ? 'text' : 'password';
+  i.className = f.type === 'password' ? 'bi bi-eye' : 'bi bi-eye-slash';
+}
+
+function updateNavAuth() {
+  const area = document.getElementById('navAuthArea');
+  const sidebarUser = document.getElementById('sidebarUsername');
+  const sidebarRole = document.getElementById('sidebarRole');
+  if (currentUser) {
+    area.innerHTML = `<span class="text-warning me-2"><i class="bi bi-person-check me-1"></i>${currentUser.username} <span class="badge bg-warning text-dark">${currentUser.role}</span></span><a class="btn btn-outline-light btn-sm" href="#" onclick="doLogout()"><i class="bi bi-box-arrow-right me-1"></i>Logout</a>`;
+    sidebarUser.textContent = currentUser.username;
+    sidebarRole.innerHTML = `<span class="badge bg-${currentUser.role === 'Admin' ? 'danger' : 'primary'}">${currentUser.role}</span>`;
+  } else {
+    area.innerHTML = `<a class="btn btn-outline-light btn-sm" href="#" onclick="showPage('login')"><i class="bi bi-box-arrow-in-right me-1"></i>Login</a>`;
+    sidebarUser.textContent = 'Nama Saya';
+    sidebarRole.innerHTML = '<span class="badge bg-primary">Mahasiswa</span>';
+  }
+}
+
+// ========== LEVEL CRUD ==========
+function renderLevel() {
+  const warn = document.getElementById('levelAuthWarn');
+  const content = document.getElementById('levelContent');
+  if (!currentUser) { warn.classList.remove('d-none'); content.classList.add('d-none'); return; }
+  warn.classList.add('d-none'); content.classList.remove('d-none');
+  
+  const tbody = document.getElementById('levelTableBody');
+  document.getElementById('levelCount').textContent = levels.length;
+  tbody.innerHTML = levels.length === 0 ? '<tr><td colspan="4" class="text-center text-muted py-3">Belum ada data</td></tr>' :
+    levels.map(l => `
+      <tr>
+        <td>${l.id}</td>
+        <td><span class="badge bg-primary">${l.nama}</span></td>
+        <td class="text-muted small">${l.keterangan}</td>
+        <td class="text-center">
+          <button class="btn btn-warning btn-sm me-1" onclick="editLevel(${l.id})"><i class="bi bi-pencil"></i></button>
+          <button class="btn btn-danger btn-sm" onclick="deleteLevel(${l.id})"><i class="bi bi-trash"></i></button>
+        </td>
+      </tr>`).join('');
+}
+
+function saveLevel() {
+  const nama = document.getElementById('levelNama').value.trim();
+  if (!nama) { alert('Nama level wajib diisi!'); return; }
+  const ket = document.getElementById('levelKet').value.trim();
+  const editId = parseInt(document.getElementById('levelEditId').value) || 0;
+  
+  if (editId) {
+    const l = levels.find(x => x.id === editId);
+    if (l) { l.nama = nama; l.keterangan = ket; }
+    showLevelMsg('Level berhasil diperbarui!', 'success');
+    cancelLevelEdit();
+  } else {
+    levels.push({id: levelNextId++, nama, keterangan: ket});
+    showLevelMsg('Level berhasil ditambahkan!', 'success');
+  }
+  document.getElementById('levelNama').value = '';
+  document.getElementById('levelKet').value = '';
+  renderLevel();
+  renderStudiesLevelSelect(); // update dropdown
+}
+
+function editLevel(id) {
+  const l = levels.find(x => x.id === id);
+  if (!l) return;
+  document.getElementById('levelEditId').value = id;
+  document.getElementById('levelNama').value = l.nama;
+  document.getElementById('levelKet').value = l.keterangan;
+  document.getElementById('levelFormHeader').innerHTML = '<i class="bi bi-pencil me-2"></i>Edit Level';
+  document.getElementById('levelFormHeader').className = 'card-header bg-warning text-white fw-bold';
+  document.getElementById('levelSaveBtn').className = 'btn btn-warning flex-fill';
+  document.getElementById('levelSaveBtn').innerHTML = '<i class="bi bi-save me-1"></i>Update';
+  document.getElementById('levelCancelBtn').classList.remove('d-none');
+}
+
+function cancelLevelEdit() {
+  document.getElementById('levelEditId').value = '';
+  document.getElementById('levelNama').value = '';
+  document.getElementById('levelKet').value = '';
+  document.getElementById('levelFormHeader').innerHTML = '<i class="bi bi-plus-circle me-2"></i>Tambah Level';
+  document.getElementById('levelFormHeader').className = 'card-header bg-primary text-white fw-bold';
+  document.getElementById('levelSaveBtn').className = 'btn btn-primary flex-fill';
+  document.getElementById('levelSaveBtn').innerHTML = '<i class="bi bi-save me-1"></i>Simpan';
+  document.getElementById('levelCancelBtn').classList.add('d-none');
+}
+
+function deleteLevel(id) {
+  if (!confirm('Hapus level ini?')) return;
+  levels = levels.filter(l => l.id !== id);
+  showLevelMsg('Level berhasil dihapus!', 'warning');
+  renderLevel();
+}
+
+function showLevelMsg(text, type) {
+  const el = document.getElementById('levelMsg');
+  el.innerHTML = `<div class="alert alert-${type} alert-dismissible fade show py-2"><i class="bi bi-check-circle me-2"></i>${text}<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>`;
+  setTimeout(() => el.innerHTML = '', 3000);
+}
+
+// ========== STUDIES CRUD ==========
+function renderStudiesLevelSelect() {
+  const sel = document.getElementById('studiesLevel');
+  if (!sel) return;
+  sel.innerHTML = levels.map(l => `<option value="${l.id}">${l.nama}</option>`).join('');
+}
+
+function renderStudies() {
+  const warn = document.getElementById('studiesAuthWarn');
+  const content = document.getElementById('studiesContent');
+  if (!currentUser) { warn.classList.remove('d-none'); content.classList.add('d-none'); return; }
+  warn.classList.add('d-none'); content.classList.remove('d-none');
+  
+  renderStudiesLevelSelect();
+  
+  const levelMap = {};
+  levels.forEach(l => levelMap[l.id] = l.nama);
+  
+  const tbody = document.getElementById('studiesTableBody');
+  document.getElementById('studiesCount').textContent = studies.length;
+  tbody.innerHTML = studies.length === 0 ? '<tr><td colspan="7" class="text-center text-muted py-3">Belum ada data</td></tr>' :
+    studies.map(s => `
+      <tr>
+        <td>${s.id}</td>
+        <td>${s.foto ? `<img src="${s.foto}" width="45" height="45" class="rounded border object-fit-cover">` : `<div class="rounded bg-primary bg-opacity-10 d-flex align-items-center justify-content-center" style="width:45px;height:45px"><i class="bi bi-mortarboard text-primary"></i></div>`}</td>
+        <td class="fw-semibold">${s.nama}</td>
+        <td><span class="badge bg-success">${levelMap[s.id_level] || s.id_level}</span></td>
+        <td class="text-muted small">${s.tahun}</td>
+        <td class="text-muted small">${s.keterangan}</td>
+        <td class="text-center">
+          <button class="btn btn-warning btn-sm me-1" onclick="editStudy(${s.id})"><i class="bi bi-pencil"></i></button>
+          <button class="btn btn-danger btn-sm" onclick="deleteStudy(${s.id})"><i class="bi bi-trash"></i></button>
+        </td>
+      </tr>`).join('');
+}
+
+function saveStudy() {
+  const nama = document.getElementById('studiesNama').value.trim();
+  if (!nama) { alert('Nama institusi wajib diisi!'); return; }
+  const id_level = parseInt(document.getElementById('studiesLevel').value);
+  const tahun = document.getElementById('studiesTahun').value.trim();
+  const foto = document.getElementById('studiesFoto').value.trim();
+  const ket = document.getElementById('studiesKet').value.trim();
+  const editId = parseInt(document.getElementById('studiesEditId').value) || 0;
+  
+  if (editId) {
+    const s = studies.find(x => x.id === editId);
+    if (s) { s.nama = nama; s.id_level = id_level; s.tahun = tahun; s.foto = foto; s.keterangan = ket; }
+    showStudiesMsg('Data studi berhasil diperbarui!', 'success');
+    cancelStudyEdit();
+  } else {
+    studies.push({id: studiesNextId++, nama, id_level, tahun, foto, keterangan: ket});
+    showStudiesMsg('Data studi berhasil ditambahkan!', 'success');
+  }
+  document.getElementById('studiesNama').value = '';
+  document.getElementById('studiesTahun').value = '';
+  document.getElementById('studiesFoto').value = '';
+  document.getElementById('studiesKet').value = '';
+  renderStudies();
+}
+
+function editStudy(id) {
+  const s = studies.find(x => x.id === id);
+  if (!s) return;
+  document.getElementById('studiesEditId').value = id;
+  document.getElementById('studiesNama').value = s.nama;
+  document.getElementById('studiesLevel').value = s.id_level;
+  document.getElementById('studiesTahun').value = s.tahun;
+  document.getElementById('studiesFoto').value = s.foto;
+  document.getElementById('studiesKet').value = s.keterangan;
+  document.getElementById('studiesFormHeader').innerHTML = '<i class="bi bi-pencil me-2"></i>Edit Data Studi';
+  document.getElementById('studiesFormHeader').style.background = '#ffc107';
+  document.getElementById('studiesSaveBtn').className = 'btn btn-warning me-2';
+  document.getElementById('studiesSaveBtn').innerHTML = '<i class="bi bi-save me-1"></i>Update Data';
+  document.getElementById('studiesCancelBtn').classList.remove('d-none');
+}
+
+function cancelStudyEdit() {
+  document.getElementById('studiesEditId').value = '';
+  document.getElementById('studiesNama').value = '';
+  document.getElementById('studiesTahun').value = '';
+  document.getElementById('studiesFoto').value = '';
+  document.getElementById('studiesKet').value = '';
+  document.getElementById('studiesFormHeader').innerHTML = '<i class="bi bi-plus-circle me-2"></i>Tambah Data Studi';
+  document.getElementById('studiesFormHeader').style.background = '#0d6efd';
+  document.getElementById('studiesSaveBtn').className = 'btn btn-primary me-2';
+  document.getElementById('studiesSaveBtn').innerHTML = '<i class="bi bi-save me-1"></i>Simpan Data';
+  document.getElementById('studiesCancelBtn').classList.add('d-none');
+}
+
+function deleteStudy(id) {
+  if (!confirm('Hapus data studi ini?')) return;
+  studies = studies.filter(s => s.id !== id);
+  showStudiesMsg('Data studi berhasil dihapus!', 'warning');
+  renderStudies();
+}
+
+function showStudiesMsg(text, type) {
+  const el = document.getElementById('studiesMsg');
+  el.innerHTML = `<div class="alert alert-${type} alert-dismissible fade show py-2"><i class="bi bi-check-circle me-2"></i>${text}<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>`;
+  setTimeout(() => el.innerHTML = '', 3000);
+}
+
+// ========== CONTACT ==========
+function sendMsg() {
+  const n = document.getElementById('cName').value;
+  const e = document.getElementById('cEmail').value;
+  if (!n || !e) { alert('Isi nama dan email terlebih dahulu!'); return; }
+  const a = document.getElementById('contactAlert');
+  a.classList.remove('d-none');
+  setTimeout(() => a.classList.add('d-none'), 4000);
+}
+
+// ========== INIT ==========
+renderStudiesLevelSelect();
+</script>
+</body>
+</html>
