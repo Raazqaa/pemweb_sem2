@@ -6,6 +6,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
 
 class PegawaisTable
@@ -23,11 +24,13 @@ class PegawaisTable
                     ->searchable(),
                 TextColumn::make('gender')
                     ->badge(),
-                TextColumn::make('divisi_id')
+                TextColumn::make('divisi.nama_divisi')
                     ->numeric()
+                    ->searchable()
                     ->sortable(),
-                TextColumn::make('jabatan_id')
+                TextColumn::make('jabatan.nama_jabatan')
                     ->numeric()
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('tmp_lahir')
                     ->searchable(),
@@ -36,8 +39,9 @@ class PegawaisTable
                     ->sortable(),
                 TextColumn::make('hp')
                     ->searchable(),
-                TextColumn::make('foto')
-                    ->searchable(),
+                ImageColumn::make('foto')
+                    ->label('foto')
+                    ->circular(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

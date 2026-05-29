@@ -3,10 +3,12 @@
 namespace App\Filament\Resources\Pegawais\Schemas;
 
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
+use Illuminate\Database\Eloquent\Factories\Relationship;
 
 class PegawaiForm
 {
@@ -24,12 +26,16 @@ class PegawaiForm
                 Select::make('gender')
                     ->options(['Laki-laki' => 'Laki laki', 'Perempuan' => 'Perempuan'])
                     ->required(),
-                TextInput::make('divisi_id')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('jabatan_id')
-                    ->required()
-                    ->numeric(),
+                Select::make('divisi_id')
+                    ->relationship('divisi', 'nama_divisi')
+                    ->searchable()
+                    ->preload()
+                    ->required(),
+                Select::make('jabatan_id')
+                    ->relationship('jabatan', 'nama_jabatan')
+                    ->searchable()
+                    ->preload()
+                    ->required(),
                 TextInput::make('tmp_lahir')
                     ->required(),
                 DatePicker::make('tgl_lahir')
@@ -39,7 +45,11 @@ class PegawaiForm
                 Textarea::make('alamat')
                     ->required()
                     ->columnSpanFull(),
-                TextInput::make('foto'),
+                FileUpload::make('foto')
+                    ->label('foto Pegawai')
+                    ->image()
+                    ->directory('pegawai')
+                    ->imageEditor()->maxSize(2048)->nullable(),
             ]);
     }
 }
