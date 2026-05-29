@@ -25,7 +25,7 @@ $show_header = ($page === 'home');
     :root {
       --bs-font-sans-serif: 'Plus Jakarta Sans', sans-serif;
     }
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8f9fb; }
+    body { font-family: 'Poppins'; background: #f8f9fb; }
 
     /* Carousel */
     .carousel-bg { height: 320px; background: linear-gradient(135deg, #0d6efd, #6610f2); }
