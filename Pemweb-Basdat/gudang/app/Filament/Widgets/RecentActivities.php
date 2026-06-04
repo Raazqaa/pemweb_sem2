@@ -11,30 +11,30 @@ use Filament\Widgets\TableWidget as BaseWidget;
 class RecentActivities extends BaseWidget
 {
     protected static ?int $sort = 5;
+    protected static ?string $heading = '📋 Aktivitas Terbaru';
 
     public function table(Tables\Table $table): Tables\Table
     {
         $activities = collect();
-
-        // Barang Masuk
         InboundTransaction::latest()
             ->take(5)
             ->get()
             ->each(function ($item) use ($activities) {
                 $activities->push([
                     'Tanggal' => $item->tanggal_masuk,
-                    'aktivitas' => "Barang Masuk: {$item->product->nama_barang} (+{$item->jumlah_masuk})",
+                    'Keterangan' => 'masuk',
+                    'aktivitas' => "{$item->product->nama_barang} (+{$item->jumlah_masuk})",
                 ]);
             });
 
-        // Barang Keluar
         OutboundTransaction::latest()
             ->take(5)
             ->get()
             ->each(function ($item) use ($activities) {
                 $activities->push([
                     'Tanggal' => $item->tanggal_keluar,
-                    'aktivitas' => "Barang Keluar: {$item->product->nama_barang} (-{$item->jumlah_keluar})",
+                    'Keterangan' => 'keluar',
+                    'aktivitas' => "{$item->product->nama_barang} (-{$item->jumlah_keluar})",
                 ]);
             });
 
@@ -46,10 +46,23 @@ class RecentActivities extends BaseWidget
             ->records(fn() => $data)
             ->columns([
                 Tables\Columns\TextColumn::make('Tanggal')
-                    ->date('d M Y'),
+                    ->date('d M Y')
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('Keterangan')
+                    ->badge()
+                    ->formatStateUsing(fn(string $state) => match ($state) {
+                        'masuk' => '📥 MASUK',
+                        'keluar' => '📤 KELUAR',
+                    })
+                    ->color(fn(string $state) => match ($state) {
+                        'masuk' => 'info',
+                        'keluar' => 'warning',
+                    }),
 
                 Tables\Columns\TextColumn::make('aktivitas')
-                    ->searchable(),
+                    ->searchable()
+                    ->weight('medium'),
             ]);
     }
 }

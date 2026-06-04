@@ -33,12 +33,22 @@ class TransactionChart extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Barang Masuk',
+                    'label' => '📥 Barang Masuk',
                     'data' => $barangMasuk,
+                    'backgroundColor' => 'rgba(14, 165, 233, 0.6)',
+                    'borderColor' => '#0ea5e9',
+                    'borderWidth' => 2,
+                    'borderRadius' => 8,
+                    'maxBarThickness' => 40,
                 ],
                 [
-                    'label' => 'Barang Keluar',
+                    'label' => '📤 Barang Keluar',
                     'data' => $barangKeluar,
+                    'backgroundColor' => 'rgba(99, 102, 241, 0.6)',
+                    'borderColor' => '#6366f1',
+                    'borderWidth' => 2,
+                    'borderRadius' => 8,
+                    'maxBarThickness' => 40,
                 ],
             ],
 
@@ -61,6 +71,29 @@ class TransactionChart extends ChartWidget
 
     protected function getType(): string
     {
-        return 'line';
+        return 'bar';
+    }
+    protected function getOptions(): array
+    {
+        return [
+            'plugins' => [
+                'legend' => [
+                    'position' => 'top',
+                ],
+            ],
+            'scales' => [
+                'y' => [
+                    'beginAtZero' => true,
+                    'grid' => [
+                        'color' => 'rgba(255,255,255,0.05)',
+                    ],
+                ],
+                'x' => [
+                    'grid' => [
+                        'display' => false,
+                    ],
+                ],
+            ],
+        ];
     }
 }
